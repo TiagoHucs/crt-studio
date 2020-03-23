@@ -1,0 +1,32 @@
+<h6>Scenarios: {{scenarios.length}}</h6>
+<div *ngIf="scenarios.length > 0">
+    <div *ngFor="let scenario of scenarios">
+        <div class="card">
+            <div class="card-header">
+                <h5>Título: {{scenario.title}}</h5>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let step of scenario.steps">
+                    <b>Dado que: </b>{{step.description}}
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="input-group mb-3">
+                    <input #descTxt type="text" class="form-control" placeholder="descricao">
+                    <div class="input-group-append">
+                        <button class="btn btn-success" (click)="addStep(scenario,descTxt.value)">Add scenario</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="scenarios.length === 0">
+    <p><i>Nenhum cenario cadastrado</i></p>
+</div>
+<hr>
+<div [formGroup]="scenarioForm">
+    <label for="title">New scenario</label>
+    <input id="title" formControlName="title" class="form-control" />
+    <button class="btn btn-primary" (click)="incluiCenario()">Incluir</button>
+</div>
